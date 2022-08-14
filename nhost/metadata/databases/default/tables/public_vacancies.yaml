@@ -1,0 +1,30 @@
+table:
+  name: vacancies
+  schema: public
+configuration:
+  column_config:
+    closing_date:
+      custom_name: closingDate
+    id:
+      custom_name: id
+    job_ref:
+      custom_name: jobRef
+    job_type:
+      custom_name: jobType
+    staff_group:
+      custom_name: staffGroup
+  custom_column_names:
+    closing_date: closingDate
+    id: id
+    job_ref: jobRef
+    job_type: jobType
+    staff_group: staffGroup
+  custom_root_fields:
+    delete: deleteVacancies
+    delete_by_pk: deleteVacancy
+    insert: insertVacancies
+    insert_one: insertVacancy
+    select_aggregate: vacanciesAggregate
+    select_by_pk: vacancy
+    update: updateVacancies
+    update_by_pk: updateVacancy

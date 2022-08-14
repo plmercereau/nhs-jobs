@@ -1,0 +1,13 @@
+- name: fetch new vacancies
+  webhook: '{{NHOST_BACKEND_URL}}/v1/functions/fetch'
+  schedule: 0 */8 * * *
+  include_in_metadata: true
+  payload: {}
+  retry_conf:
+    num_retries: 2
+    retry_interval_seconds: 600
+    timeout_seconds: 600
+    tolerance_seconds: 21600
+  headers:
+  - name: NHOST_ADMIN_SECRET
+    value_from_env: NHOST_ADMIN_SECRET
