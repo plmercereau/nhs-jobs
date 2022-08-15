@@ -3,7 +3,6 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
-  "type": "module",
   "scripts": {
     "generate": "graphql-codegen --config graphql.config.yaml",
     "dev": "vite",
