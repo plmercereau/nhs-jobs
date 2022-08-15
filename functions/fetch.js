@@ -111,9 +111,9 @@ const load = async (all = false, page = 1) => {
 }
 
 export default async (req, res) => {
-  // if (req.headers.NHOST_ADMIN_SECRET !== process.env.NHOST_ADMIN_SECRET) {
-  //   return res.status(401)
-  // }
+  if (req.headers.NHOST_ADMIN_SECRET !== process.env.NHOST_ADMIN_SECRET) {
+    return res.status(401)
+  }
   try {
     const fetched = await load(req.body.all)
     console.log(`${new Date().toISOString()} done: upserted ${fetched} vacancies`)
