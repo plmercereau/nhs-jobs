@@ -4767,6 +4767,14 @@ export type VacanciesVarianceFields = {
   id?: Maybe<Scalars['Float']>;
 };
 
+export type DeletePageRequestMutationVariables = Exact<{
+  all: Scalars['Boolean'];
+  page: Scalars['Int'];
+}>;
+
+
+export type DeletePageRequestMutation = { __typename?: 'mutation_root', deleteFetchRequests?: { __typename?: 'fetchRequests_mutation_response', affected_rows: number } | null };
+
 export type InsertRequestMutationVariables = Exact<{
   all?: InputMaybe<Scalars['Boolean']>;
   page?: InputMaybe<Scalars['Int']>;
@@ -4783,6 +4791,13 @@ export type UpsertVacanciesMutationVariables = Exact<{
 export type UpsertVacanciesMutation = { __typename?: 'mutation_root', insertVacancies?: { __typename?: 'vacancies_mutation_response', affected_rows: number } | null };
 
 
+export const DeletePageRequestDocument = gql`
+    mutation deletePageRequest($all: Boolean!, $page: Int!) {
+  deleteFetchRequests(where: {page: {_eq: $page}, all: {_eq: $all}}) {
+    affected_rows
+  }
+}
+    `;
 export const InsertRequestDocument = gql`
     mutation insertRequest($all: Boolean, $page: Int) {
   insertFetchRequest(object: {all: $all, page: $page}) {
@@ -4808,6 +4823,9 @@ const defaultWrapper: SdkFunctionWrapper = (action, _operationName, _operationTy
 
 export function getSdk(client: GraphQLClient, withWrapper: SdkFunctionWrapper = defaultWrapper) {
   return {
+    deletePageRequest(variables: DeletePageRequestMutationVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<DeletePageRequestMutation> {
+      return withWrapper((wrappedRequestHeaders) => client.request<DeletePageRequestMutation>(DeletePageRequestDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'deletePageRequest', 'mutation');
+    },
     insertRequest(variables?: InsertRequestMutationVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<InsertRequestMutation> {
       return withWrapper((wrappedRequestHeaders) => client.request<InsertRequestMutation>(InsertRequestDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'insertRequest', 'mutation');
     },

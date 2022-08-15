@@ -1,0 +1,5 @@
+mutation deletePageRequest($all: Boolean!, $page: Int!) {
+  deleteFetchRequests(where: { page: { _eq: $page }, all: { _eq: $all } }) {
+    affected_rows
+  }
+}

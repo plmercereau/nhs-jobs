@@ -31,7 +31,7 @@ export default async (req: Request, res: Response) => {
       },
     }
   )
-  const { upsertVacancies, insertRequest } = getSdk(client)
+  const { upsertVacancies, insertRequest, deletePageRequest } = getSdk(client)
   try {
     const {
       // * When true, extracts the entire available vacancies from the NHS website.
@@ -101,8 +101,8 @@ export default async (req: Request, res: Response) => {
       const fetched = insertVacancies?.affected_rows
       if (fetched) {
         console.log(`page ${page}: upserted ${fetched} vacancies`)
+        await deletePageRequest({ all, page })
         await insertRequest({ all, page: page + 1 })
-        console.log(`done: upserted ${fetched} vacancies`)
         return res.status(200).json({ fetched })
       } else throw Error('No vacancies fetched')
     }
