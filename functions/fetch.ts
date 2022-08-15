@@ -4,16 +4,6 @@ import * as cheerio from 'cheerio'
 import { GraphQLClient } from 'graphql-request'
 import { getSdk, VacanciesInsertInput } from './_sdk'
 
-const client = new GraphQLClient(
-  `${process.env.NHOST_BACKEND_URL}/v1/graphql`,
-  {
-    headers: {
-      'x-hasura-admin-secret': process.env.HASURA_GRAPHQL_ADMIN_SECRET!,
-    },
-  }
-)
-const { upsertVacancies, insertRequest } = getSdk(client)
-
 /** Encode form data */
 const formUrlEncoded = (x: Record<string, string | number | boolean>) =>
   Object.keys(x).reduce((p, c) => p + `&${c}=${encodeURIComponent(x[c])}`, '')
@@ -91,6 +81,15 @@ const etl: (
       }
     })
     console.log(`inserting ${vacancies.length} vacancies into the database`)
+    const client = new GraphQLClient(
+      `${process.env.NHOST_BACKEND_URL}/v1/graphql`,
+      {
+        headers: {
+          'x-hasura-admin-secret': process.env.HASURA_GRAPHQL_ADMIN_SECRET!,
+        },
+      }
+    )
+    const { upsertVacancies, insertRequest } = getSdk(client)
     const { insertVacancies } = await upsertVacancies({ vacancies })
     const fetched = insertVacancies?.affected_rows
     if (fetched) {
