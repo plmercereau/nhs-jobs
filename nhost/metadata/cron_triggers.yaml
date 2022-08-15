@@ -11,5 +11,3 @@
   headers:
     - name: nhost-webhook-secret
       value_from_env: NHOST_WEBHOOK_SECRET
-    - name: x-hasura-admin-secret
-      value_from_env: HASURA_GRAPHQL_ADMIN_SECRET

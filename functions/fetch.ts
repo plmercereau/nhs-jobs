@@ -15,11 +15,10 @@ const formatDate = (d: string) =>
     : null
 
 export default async (req: Request, res: Response) => {
-  const adminSecret = req.headers['x-hasura-admin-secret'] as string
   const webhookSecret = req.headers['nhost-webhook-secret']
   if (
     process.env.NHOST_BACKEND_URL?.indexOf('http://localhost:1337') === -1 &&
-    (webhookSecret !== process.env.NHOST_WEBHOOK_SECRET || !adminSecret)
+    webhookSecret !== process.env.NHOST_WEBHOOK_SECRET
   ) {
     console.log('unauthorized attempt to run the webhook')
     return res.status(401).send('unauthorized')
@@ -28,7 +27,7 @@ export default async (req: Request, res: Response) => {
     `${process.env.NHOST_BACKEND_URL}/v1/graphql`,
     {
       headers: {
-        'x-hasura-admin-secret': adminSecret,
+        'x-hasura-admin-secret': process.env.NHOST_ADMIN_SECRET!,
       },
     }
   )
