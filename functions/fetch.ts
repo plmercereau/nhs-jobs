@@ -103,12 +103,8 @@ const etl: (
 export default async (req: Request, res: Response) => {
   if (
     process.env.NHOST_BACKEND_URL?.indexOf('http://localhost:1337') === -1 &&
-    req.headers.NHOST_WEBHOOK_SECRET !== process.env.NHOST_WEBHOOK_SECRET
+    req.headers['nhost-webhook-secret'] !== process.env.NHOST_WEBHOOK_SECRET
   ) {
-    console.log(process.env)
-    console.log('in env', process.env.NHOST_WEBHOOK_SECRET)
-    console.log('headers', req.headers)
-    console.log('in headers', req.headers.NHOST_WEBHOOK_SECRET)
     log('Unauthorized attempt to run the webhook')
     return res.status(401).send('Unauthorized')
   }

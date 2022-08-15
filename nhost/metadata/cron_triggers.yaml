@@ -9,5 +9,5 @@
     timeout_seconds: 600
     tolerance_seconds: 21600
   headers:
-    - name: NHOST_WEBHOOK_SECRET
-      value_from_env: NHOST_WEBHOOK_SECRET
+  - name: nhost-webhook-secret
+    value_from_env: NHOST_WEBHOOK_SECRET
