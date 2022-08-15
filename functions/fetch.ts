@@ -24,9 +24,6 @@ const formatDate = (d: string) =>
     ? d.split('/').reverse().join('-')
     : null
 
-/** Log with a timestamp */
-const log = (msg: string) => console.log(`${new Date().toISOString()} ${msg}`)
-
 /** Extract data from the html page, transform it to the format we want, and load it into the database */
 const etl: (
   /** When true, extracts the entire available vacancies from the NHS website.
@@ -38,6 +35,7 @@ const etl: (
    */
   page?: number
 ) => Promise<number> = async (all = false, page = 1) => {
+  console.log(`loading page ${page}`)
   const { data } = await axios.post(
     'https://www.jobs.nhs.uk/xi/search_vacancy/',
     formUrlEncoded({
@@ -61,8 +59,10 @@ const etl: (
     }),
     { headers: { 'Content-Type': 'application/x-www-form-urlencoded' } }
   )
+  console.log(`fetched html`)
   const $ = cheerio.load(data)
   const vacanciesEls = $('div.vacancy')
+  console.log(`found ${vacanciesEls.length} vacancies`)
   if (vacanciesEls.length) {
     const vacancies: VacanciesInsertInput[] = []
     vacanciesEls.each((_idx, el) => {
@@ -90,10 +90,11 @@ const etl: (
         vacancies.push(vacancy)
       }
     })
+    console.log(`inserting ${vacancies.length} vacancies into the database`)
     const { insertVacancies } = await upsertVacancies({ vacancies })
     const fetched = insertVacancies?.affected_rows
     if (fetched) {
-      log(`page ${page}: upserted ${fetched} vacancies`)
+      console.log(`page ${page}: upserted ${fetched} vacancies`)
       return fetched + (await etl(all, page + 1))
     } else throw Error('No vacancies fetched')
   }
@@ -105,12 +106,12 @@ export default async (req: Request, res: Response) => {
     process.env.NHOST_BACKEND_URL?.indexOf('http://localhost:1337') === -1 &&
     req.headers['nhost-webhook-secret'] !== process.env.NHOST_WEBHOOK_SECRET
   ) {
-    log('Unauthorized attempt to run the webhook')
-    return res.status(401).send('Unauthorized')
+    console.log('unauthorized attempt to run the webhook')
+    return res.status(401).send('unauthorized')
   }
   try {
     const fetched = await etl(req.body.all)
-    log(`done: upserted ${fetched} vacancies`)
+    console.log(`done: upserted ${fetched} vacancies`)
     return res.status(200).json({ fetched })
   } catch (error) {
     return res.status(500).json(error)
