@@ -228,7 +228,6 @@ const { height } = useElementSize(refPage)
 
 .header-table-light
   @extend .header-table
-  .header-table
   .q-table__top,
   .q-table__bottom,
   thead tr:first-child th
