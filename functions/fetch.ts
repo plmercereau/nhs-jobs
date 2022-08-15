@@ -105,8 +105,9 @@ export default async (req: Request, res: Response) => {
     process.env.NHOST_BACKEND_URL?.indexOf('http://localhost:1337') === -1 &&
     req.headers.NHOST_WEBHOOK_SECRET !== process.env.NHOST_WEBHOOK_SECRET
   ) {
+    console.log(process.env)
     log('Unauthorized attempt to run the webhook')
-    return res.status(401).json({ error: 'Unauthorized' })
+    return res.status(401).send('Unauthorized')
   }
   try {
     const fetched = await etl(req.body.all)
