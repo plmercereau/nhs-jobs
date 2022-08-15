@@ -1,0 +1,21 @@
+mutation upsertVacancies($vacancies: [vacancies_insert_input!]!) {
+  insertVacancies(
+    objects: $vacancies
+    on_conflict: {
+      constraint: vacancies_pkey
+      update_columns: [
+        title
+        category
+        agency
+        salary
+        posted
+        jobType
+        closingDate
+        staffGroup
+        jobRef
+      ]
+    }
+  ) {
+    affected_rows
+  }
+}
