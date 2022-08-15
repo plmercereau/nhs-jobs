@@ -103,7 +103,7 @@ const etl: (
 export default async (req: Request, res: Response) => {
   if (
     process.env.NHOST_BACKEND_URL?.indexOf('http://localhost:1337') === -1 &&
-    req.headers.NHOST_ADMIN_SECRET !== process.env.NHOST_ADMIN_SECRET
+    req.headers.NHOST_WEBHOOK_SECRET !== process.env.NHOST_WEBHOOK_SECRET
   ) {
     return res.status(401).json({ error: 'Unauthorized' })
   }

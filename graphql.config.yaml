@@ -6,7 +6,7 @@ generates:
   #         headers:
   #           x-hasura-admin-secret: nhost-admin-secret
   #           x-hasura-role: user
-  #   documents: 'src/**/!(*.d).{ts,tsx}'
+  #   documents: 'src/**/*.graphql'
   #   config:
   #     namingConvention:
   #       typeNames: change-case-all#pascalCase
@@ -14,7 +14,7 @@ generates:
   #   plugins:
   #     - typescript
   #     - typescript-operations
-  #     - typescript-vue-apollo-smart-ops
+  #     - typescript-vue-apollo
   ./functions/_sdk.ts:
     schema:
       - http://localhost:1337/v1/graphql:

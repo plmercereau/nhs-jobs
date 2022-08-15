@@ -5,7 +5,7 @@ specifiers:
   '@graphql-codegen/typescript': ^2.7.3
   '@graphql-codegen/typescript-graphql-request': ^4.5.3
   '@graphql-codegen/typescript-operations': ^2.5.3
-  '@graphql-codegen/typescript-vue-apollo-smart-ops': ^2.3.3
+  '@graphql-codegen/typescript-vue-apollo': ^3.3.3
   '@quasar/extras': ^1.15.1
   '@quasar/vite-plugin': ^1.1.1
   '@types/express': ^4.17.13
@@ -37,7 +37,7 @@ devDependencies:
   '@graphql-codegen/typescript': 2.7.3_graphql@16.5.0
   '@graphql-codegen/typescript-graphql-request': 4.5.3_wihr36wtlufld2xzfkmwmyj5zi
   '@graphql-codegen/typescript-operations': 2.5.3_graphql@16.5.0
-  '@graphql-codegen/typescript-vue-apollo-smart-ops': 2.3.3_graphql@16.5.0
+  '@graphql-codegen/typescript-vue-apollo': 3.3.3_graphql@16.5.0
   '@quasar/vite-plugin': 1.1.1_xtocpbdaw5abou6lzhqwnkvcbe
   '@types/express': 4.17.13
   '@vitejs/plugin-vue': 3.0.3_vite@3.0.7+vue@3.2.37
@@ -783,8 +783,8 @@ packages:
       - supports-color
     dev: true
 
-  /@graphql-codegen/typescript-vue-apollo-smart-ops/2.3.3_graphql@16.5.0:
-    resolution: {integrity: sha512-7ojjaPcgovtbDAf6bmZ/ezo4vHnFO42mmRKa+3PFOp0fWt0eh+ONNQmqwFmiMErlkoDOj5PADkGA9eJAIR17KQ==}
+  /@graphql-codegen/typescript-vue-apollo/3.3.3_graphql@16.5.0:
+    resolution: {integrity: sha512-CNqZ3gnGq5Febqe58yjx0PH8aga0oYy7UE7qOVzHd+u3zRVKzWLBThEQnsYg8LLrKilbuO5dx3mMMOGZomQFhg==}
     peerDependencies:
       graphql: ^0.8.0 || ^0.9.0 || ^0.10.0 || ^0.11.0 || ^0.12.0 || ^0.13.0 || ^14.0.0 || ^15.0.0 || ^16.0.0
       graphql-tag: ^2.0.0
