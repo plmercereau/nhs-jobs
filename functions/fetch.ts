@@ -55,7 +55,7 @@ const etl: (
       daysback_supercede: '',
       exclude: '',
       exclude_field: '',
-      max_result: 50,
+      max_result: 20,
     }),
     { headers: { 'Content-Type': 'application/x-www-form-urlencoded' } }
   )
