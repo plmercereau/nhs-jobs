@@ -106,6 +106,9 @@ export default async (req: Request, res: Response) => {
     req.headers.NHOST_WEBHOOK_SECRET !== process.env.NHOST_WEBHOOK_SECRET
   ) {
     console.log(process.env)
+    console.log('in env', process.env.NHOST_WEBHOOK_SECRET)
+    console.log('headers', req.headers)
+    console.log('in headers', req.headers.NHOST_WEBHOOK_SECRET)
     log('Unauthorized attempt to run the webhook')
     return res.status(401).send('Unauthorized')
   }
