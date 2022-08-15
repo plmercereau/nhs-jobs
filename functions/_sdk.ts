@@ -1827,6 +1827,197 @@ export type DateComparisonExp = {
   _nin?: InputMaybe<Array<Scalars['date']>>;
 };
 
+/** columns and relationships of "fetch_requests" */
+export type FetchRequests = {
+  __typename?: 'fetchRequests';
+  all: Scalars['Boolean'];
+  id: Scalars['uuid'];
+  page: Scalars['Int'];
+};
+
+/** aggregated selection of "fetch_requests" */
+export type FetchRequestsAggregate = {
+  __typename?: 'fetchRequests_aggregate';
+  aggregate?: Maybe<FetchRequestsAggregateFields>;
+  nodes: Array<FetchRequests>;
+};
+
+/** aggregate fields of "fetch_requests" */
+export type FetchRequestsAggregateFields = {
+  __typename?: 'fetchRequests_aggregate_fields';
+  avg?: Maybe<FetchRequestsAvgFields>;
+  count: Scalars['Int'];
+  max?: Maybe<FetchRequestsMaxFields>;
+  min?: Maybe<FetchRequestsMinFields>;
+  stddev?: Maybe<FetchRequestsStddevFields>;
+  stddev_pop?: Maybe<FetchRequestsStddevPopFields>;
+  stddev_samp?: Maybe<FetchRequestsStddevSampFields>;
+  sum?: Maybe<FetchRequestsSumFields>;
+  var_pop?: Maybe<FetchRequestsVarPopFields>;
+  var_samp?: Maybe<FetchRequestsVarSampFields>;
+  variance?: Maybe<FetchRequestsVarianceFields>;
+};
+
+
+/** aggregate fields of "fetch_requests" */
+export type FetchRequestsAggregateFieldsCountArgs = {
+  columns?: InputMaybe<Array<FetchRequestsSelectColumn>>;
+  distinct?: InputMaybe<Scalars['Boolean']>;
+};
+
+/** aggregate avg on columns */
+export type FetchRequestsAvgFields = {
+  __typename?: 'fetchRequests_avg_fields';
+  page?: Maybe<Scalars['Float']>;
+};
+
+/** Boolean expression to filter rows from the table "fetch_requests". All fields are combined with a logical 'AND'. */
+export type FetchRequestsBoolExp = {
+  _and?: InputMaybe<Array<FetchRequestsBoolExp>>;
+  _not?: InputMaybe<FetchRequestsBoolExp>;
+  _or?: InputMaybe<Array<FetchRequestsBoolExp>>;
+  all?: InputMaybe<BooleanComparisonExp>;
+  id?: InputMaybe<UuidComparisonExp>;
+  page?: InputMaybe<IntComparisonExp>;
+};
+
+/** unique or primary key constraints on table "fetch_requests" */
+export enum FetchRequestsConstraint {
+  /** unique or primary key constraint on columns "id" */
+  FetchRequestsPkey = 'fetch_requests_pkey'
+}
+
+/** input type for incrementing numeric columns in table "fetch_requests" */
+export type FetchRequestsIncInput = {
+  page?: InputMaybe<Scalars['Int']>;
+};
+
+/** input type for inserting data into table "fetch_requests" */
+export type FetchRequestsInsertInput = {
+  all?: InputMaybe<Scalars['Boolean']>;
+  id?: InputMaybe<Scalars['uuid']>;
+  page?: InputMaybe<Scalars['Int']>;
+};
+
+/** aggregate max on columns */
+export type FetchRequestsMaxFields = {
+  __typename?: 'fetchRequests_max_fields';
+  id?: Maybe<Scalars['uuid']>;
+  page?: Maybe<Scalars['Int']>;
+};
+
+/** aggregate min on columns */
+export type FetchRequestsMinFields = {
+  __typename?: 'fetchRequests_min_fields';
+  id?: Maybe<Scalars['uuid']>;
+  page?: Maybe<Scalars['Int']>;
+};
+
+/** response of any mutation on the table "fetch_requests" */
+export type FetchRequestsMutationResponse = {
+  __typename?: 'fetchRequests_mutation_response';
+  /** number of rows affected by the mutation */
+  affected_rows: Scalars['Int'];
+  /** data from the rows affected by the mutation */
+  returning: Array<FetchRequests>;
+};
+
+/** on_conflict condition type for table "fetch_requests" */
+export type FetchRequestsOnConflict = {
+  constraint: FetchRequestsConstraint;
+  update_columns?: Array<FetchRequestsUpdateColumn>;
+  where?: InputMaybe<FetchRequestsBoolExp>;
+};
+
+/** Ordering options when selecting data from "fetch_requests". */
+export type FetchRequestsOrderBy = {
+  all?: InputMaybe<OrderBy>;
+  id?: InputMaybe<OrderBy>;
+  page?: InputMaybe<OrderBy>;
+};
+
+/** primary key columns input for table: fetchRequests */
+export type FetchRequestsPkColumnsInput = {
+  id: Scalars['uuid'];
+};
+
+/** select columns of table "fetch_requests" */
+export enum FetchRequestsSelectColumn {
+  /** column name */
+  All = 'all',
+  /** column name */
+  Id = 'id',
+  /** column name */
+  Page = 'page'
+}
+
+/** input type for updating data in table "fetch_requests" */
+export type FetchRequestsSetInput = {
+  all?: InputMaybe<Scalars['Boolean']>;
+  id?: InputMaybe<Scalars['uuid']>;
+  page?: InputMaybe<Scalars['Int']>;
+};
+
+/** aggregate stddev on columns */
+export type FetchRequestsStddevFields = {
+  __typename?: 'fetchRequests_stddev_fields';
+  page?: Maybe<Scalars['Float']>;
+};
+
+/** aggregate stddev_pop on columns */
+export type FetchRequestsStddevPopFields = {
+  __typename?: 'fetchRequests_stddev_pop_fields';
+  page?: Maybe<Scalars['Float']>;
+};
+
+/** aggregate stddev_samp on columns */
+export type FetchRequestsStddevSampFields = {
+  __typename?: 'fetchRequests_stddev_samp_fields';
+  page?: Maybe<Scalars['Float']>;
+};
+
+/** aggregate sum on columns */
+export type FetchRequestsSumFields = {
+  __typename?: 'fetchRequests_sum_fields';
+  page?: Maybe<Scalars['Int']>;
+};
+
+/** update columns of table "fetch_requests" */
+export enum FetchRequestsUpdateColumn {
+  /** column name */
+  All = 'all',
+  /** column name */
+  Id = 'id',
+  /** column name */
+  Page = 'page'
+}
+
+export type FetchRequestsUpdates = {
+  /** increments the numeric columns with given value of the filtered values */
+  _inc?: InputMaybe<FetchRequestsIncInput>;
+  /** sets the columns of the filtered rows to the given values */
+  _set?: InputMaybe<FetchRequestsSetInput>;
+  where: FetchRequestsBoolExp;
+};
+
+/** aggregate var_pop on columns */
+export type FetchRequestsVarPopFields = {
+  __typename?: 'fetchRequests_var_pop_fields';
+  page?: Maybe<Scalars['Float']>;
+};
+
+/** aggregate var_samp on columns */
+export type FetchRequestsVarSampFields = {
+  __typename?: 'fetchRequests_var_samp_fields';
+  page?: Maybe<Scalars['Float']>;
+};
+
+/** aggregate variance on columns */
+export type FetchRequestsVarianceFields = {
+  __typename?: 'fetchRequests_variance_fields';
+  page?: Maybe<Scalars['Float']>;
+};
+
 /** columns and relationships of "storage.files" */
 export type Files = {
   __typename?: 'files';
@@ -2251,6 +2442,10 @@ export type MutationRoot = {
   deleteBucket?: Maybe<Buckets>;
   /** delete data from the table: "storage.buckets" */
   deleteBuckets?: Maybe<BucketsMutationResponse>;
+  /** delete single row from the table: "fetch_requests" */
+  deleteFetchRequest?: Maybe<FetchRequests>;
+  /** delete data from the table: "fetch_requests" */
+  deleteFetchRequests?: Maybe<FetchRequestsMutationResponse>;
   /** delete single row from the table: "storage.files" */
   deleteFile?: Maybe<Files>;
   /** delete data from the table: "storage.files" */
@@ -2295,6 +2490,10 @@ export type MutationRoot = {
   insertBucket?: Maybe<Buckets>;
   /** insert data into the table: "storage.buckets" */
   insertBuckets?: Maybe<BucketsMutationResponse>;
+  /** insert a single row into the table: "fetch_requests" */
+  insertFetchRequest?: Maybe<FetchRequests>;
+  /** insert data into the table: "fetch_requests" */
+  insertFetchRequests?: Maybe<FetchRequestsMutationResponse>;
   /** insert a single row into the table: "storage.files" */
   insertFile?: Maybe<Files>;
   /** insert data into the table: "storage.files" */
@@ -2339,6 +2538,10 @@ export type MutationRoot = {
   updateBucket?: Maybe<Buckets>;
   /** update data of the table: "storage.buckets" */
   updateBuckets?: Maybe<BucketsMutationResponse>;
+  /** update single row of the table: "fetch_requests" */
+  updateFetchRequest?: Maybe<FetchRequests>;
+  /** update data of the table: "fetch_requests" */
+  updateFetchRequests?: Maybe<FetchRequestsMutationResponse>;
   /** update single row of the table: "storage.files" */
   updateFile?: Maybe<Files>;
   /** update data of the table: "storage.files" */
@@ -2367,6 +2570,8 @@ export type MutationRoot = {
   update_authUserRoles_many?: Maybe<Array<Maybe<AuthUserRolesMutationResponse>>>;
   /** update multiples rows of table: "storage.buckets" */
   update_buckets_many?: Maybe<Array<Maybe<BucketsMutationResponse>>>;
+  /** update multiples rows of table: "fetch_requests" */
+  update_fetchRequests_many?: Maybe<Array<Maybe<FetchRequestsMutationResponse>>>;
   /** update multiples rows of table: "storage.files" */
   update_files_many?: Maybe<Array<Maybe<FilesMutationResponse>>>;
   /** update multiples rows of table: "auth.users" */
@@ -2469,6 +2674,18 @@ export type MutationRootDeleteBucketArgs = {
 /** mutation root */
 export type MutationRootDeleteBucketsArgs = {
   where: BucketsBoolExp;
+};
+
+
+/** mutation root */
+export type MutationRootDeleteFetchRequestArgs = {
+  id: Scalars['uuid'];
+};
+
+
+/** mutation root */
+export type MutationRootDeleteFetchRequestsArgs = {
+  where: FetchRequestsBoolExp;
 };
 
 
@@ -2617,6 +2834,20 @@ export type MutationRootInsertBucketArgs = {
 export type MutationRootInsertBucketsArgs = {
   objects: Array<BucketsInsertInput>;
   on_conflict?: InputMaybe<BucketsOnConflict>;
+};
+
+
+/** mutation root */
+export type MutationRootInsertFetchRequestArgs = {
+  object: FetchRequestsInsertInput;
+  on_conflict?: InputMaybe<FetchRequestsOnConflict>;
+};
+
+
+/** mutation root */
+export type MutationRootInsertFetchRequestsArgs = {
+  objects: Array<FetchRequestsInsertInput>;
+  on_conflict?: InputMaybe<FetchRequestsOnConflict>;
 };
 
 
@@ -2789,6 +3020,22 @@ export type MutationRootUpdateBucketsArgs = {
 
 
 /** mutation root */
+export type MutationRootUpdateFetchRequestArgs = {
+  _inc?: InputMaybe<FetchRequestsIncInput>;
+  _set?: InputMaybe<FetchRequestsSetInput>;
+  pk_columns: FetchRequestsPkColumnsInput;
+};
+
+
+/** mutation root */
+export type MutationRootUpdateFetchRequestsArgs = {
+  _inc?: InputMaybe<FetchRequestsIncInput>;
+  _set?: InputMaybe<FetchRequestsSetInput>;
+  where: FetchRequestsBoolExp;
+};
+
+
+/** mutation root */
 export type MutationRootUpdateFileArgs = {
   _inc?: InputMaybe<FilesIncInput>;
   _set?: InputMaybe<FilesSetInput>;
@@ -2893,6 +3140,12 @@ export type MutationRootUpdateBucketsManyArgs = {
 
 
 /** mutation root */
+export type MutationRootUpdateFetchRequestsManyArgs = {
+  updates: Array<FetchRequestsUpdates>;
+};
+
+
+/** mutation root */
 export type MutationRootUpdateFilesManyArgs = {
   updates: Array<FilesUpdates>;
 };
@@ -2975,6 +3228,12 @@ export type QueryRoot = {
   buckets: Array<Buckets>;
   /** fetch aggregated fields from the table: "storage.buckets" */
   bucketsAggregate: BucketsAggregate;
+  /** fetch data from the table: "fetch_requests" using primary key columns */
+  fetchRequest?: Maybe<FetchRequests>;
+  /** fetch data from the table: "fetch_requests" */
+  fetchRequests: Array<FetchRequests>;
+  /** fetch aggregated fields from the table: "fetch_requests" */
+  fetchRequestsAggregate: FetchRequestsAggregate;
   /** fetch data from the table: "storage.files" using primary key columns */
   file?: Maybe<Files>;
   /** An array relationship */
@@ -3180,6 +3439,29 @@ export type QueryRootBucketsAggregateArgs = {
 };
 
 
+export type QueryRootFetchRequestArgs = {
+  id: Scalars['uuid'];
+};
+
+
+export type QueryRootFetchRequestsArgs = {
+  distinct_on?: InputMaybe<Array<FetchRequestsSelectColumn>>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<FetchRequestsOrderBy>>;
+  where?: InputMaybe<FetchRequestsBoolExp>;
+};
+
+
+export type QueryRootFetchRequestsAggregateArgs = {
+  distinct_on?: InputMaybe<Array<FetchRequestsSelectColumn>>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<FetchRequestsOrderBy>>;
+  where?: InputMaybe<FetchRequestsBoolExp>;
+};
+
+
 export type QueryRootFileArgs = {
   id: Scalars['uuid'];
 };
@@ -3298,6 +3580,12 @@ export type SubscriptionRoot = {
   buckets: Array<Buckets>;
   /** fetch aggregated fields from the table: "storage.buckets" */
   bucketsAggregate: BucketsAggregate;
+  /** fetch data from the table: "fetch_requests" using primary key columns */
+  fetchRequest?: Maybe<FetchRequests>;
+  /** fetch data from the table: "fetch_requests" */
+  fetchRequests: Array<FetchRequests>;
+  /** fetch aggregated fields from the table: "fetch_requests" */
+  fetchRequestsAggregate: FetchRequestsAggregate;
   /** fetch data from the table: "storage.files" using primary key columns */
   file?: Maybe<Files>;
   /** An array relationship */
@@ -3500,6 +3788,29 @@ export type SubscriptionRootBucketsAggregateArgs = {
   offset?: InputMaybe<Scalars['Int']>;
   order_by?: InputMaybe<Array<BucketsOrderBy>>;
   where?: InputMaybe<BucketsBoolExp>;
+};
+
+
+export type SubscriptionRootFetchRequestArgs = {
+  id: Scalars['uuid'];
+};
+
+
+export type SubscriptionRootFetchRequestsArgs = {
+  distinct_on?: InputMaybe<Array<FetchRequestsSelectColumn>>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<FetchRequestsOrderBy>>;
+  where?: InputMaybe<FetchRequestsBoolExp>;
+};
+
+
+export type SubscriptionRootFetchRequestsAggregateArgs = {
+  distinct_on?: InputMaybe<Array<FetchRequestsSelectColumn>>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<FetchRequestsOrderBy>>;
+  where?: InputMaybe<FetchRequestsBoolExp>;
 };
 
 
@@ -4456,6 +4767,14 @@ export type VacanciesVarianceFields = {
   id?: Maybe<Scalars['Float']>;
 };
 
+export type InsertRequestMutationVariables = Exact<{
+  all?: InputMaybe<Scalars['Boolean']>;
+  page?: InputMaybe<Scalars['Int']>;
+}>;
+
+
+export type InsertRequestMutation = { __typename?: 'mutation_root', insertFetchRequest?: { __typename?: 'fetchRequests', id: any } | null };
+
 export type UpsertVacanciesMutationVariables = Exact<{
   vacancies: Array<VacanciesInsertInput> | VacanciesInsertInput;
 }>;
@@ -4464,6 +4783,13 @@ export type UpsertVacanciesMutationVariables = Exact<{
 export type UpsertVacanciesMutation = { __typename?: 'mutation_root', insertVacancies?: { __typename?: 'vacancies_mutation_response', affected_rows: number } | null };
 
 
+export const InsertRequestDocument = gql`
+    mutation insertRequest($all: Boolean, $page: Int) {
+  insertFetchRequest(object: {all: $all, page: $page}) {
+    id
+  }
+}
+    `;
 export const UpsertVacanciesDocument = gql`
     mutation upsertVacancies($vacancies: [vacancies_insert_input!]!) {
   insertVacancies(
@@ -4482,6 +4808,9 @@ const defaultWrapper: SdkFunctionWrapper = (action, _operationName, _operationTy
 
 export function getSdk(client: GraphQLClient, withWrapper: SdkFunctionWrapper = defaultWrapper) {
   return {
+    insertRequest(variables?: InsertRequestMutationVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<InsertRequestMutation> {
+      return withWrapper((wrappedRequestHeaders) => client.request<InsertRequestMutation>(InsertRequestDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'insertRequest', 'mutation');
+    },
     upsertVacancies(variables: UpsertVacanciesMutationVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<UpsertVacanciesMutation> {
       return withWrapper((wrappedRequestHeaders) => client.request<UpsertVacanciesMutation>(UpsertVacanciesDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'upsertVacancies', 'mutation');
     }

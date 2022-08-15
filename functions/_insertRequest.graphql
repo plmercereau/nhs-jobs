@@ -1,0 +1,5 @@
+mutation insertRequest($all: Boolean, $page: Int) {
+  insertFetchRequest(object: { all: $all, page: $page }) {
+    id
+  }
+}

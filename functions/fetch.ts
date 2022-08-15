@@ -12,7 +12,7 @@ const client = new GraphQLClient(
     },
   }
 )
-const { upsertVacancies } = getSdk(client)
+const { upsertVacancies, insertRequest } = getSdk(client)
 
 /** Encode form data */
 const formUrlEncoded = (x: Record<string, string | number | boolean>) =>
@@ -95,7 +95,8 @@ const etl: (
     const fetched = insertVacancies?.affected_rows
     if (fetched) {
       console.log(`page ${page}: upserted ${fetched} vacancies`)
-      return fetched + (await etl(all, page + 1))
+      await insertRequest({ all, page: page + 1 })
+      return fetched
     } else throw Error('No vacancies fetched')
   }
   return 0
@@ -110,10 +111,10 @@ export default async (req: Request, res: Response) => {
     return res.status(401).send('unauthorized')
   }
   try {
-    etl(req.body.all).then(fetched => {
-      console.log(`done: upserted ${fetched} vacancies`)
-    })
-    return res.status(200).json({ fetching: true })
+    const { all, page } = req.body
+    const fetched = await etl(all, page)
+    console.log(`done: upserted ${fetched} vacancies`)
+    return res.status(200).json({ fetched })
   } catch (error) {
     return res.status(500).json(error)
   }
