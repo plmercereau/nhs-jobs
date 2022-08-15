@@ -101,6 +101,7 @@ export default async (req: Request, res: Response) => {
       const fetched = insertVacancies?.affected_rows
       if (fetched) {
         console.log(`page ${page}: upserted ${fetched} vacancies`)
+        // TODO delete by request id (passed on along with 'all' and 'page')
         await deletePageRequest({ all, page })
         await insertRequest({ all, page: page + 1 })
         return res.status(200).json({ fetched })
