@@ -3,7 +3,7 @@
 
     <q-header elevated class="bg-primary text-white">
       <q-toolbar>
-        <q-btn dense flat round icon="menu" @click="toggleLeftDrawer" />
+        <!-- <q-btn dense flat round icon="menu" @click="toggleLeftDrawer" /> -->
 
         <q-toolbar-title>
           NHS Jobs
@@ -12,7 +12,7 @@
       </q-toolbar>
     </q-header>
 
-    <q-drawer v-model="leftDrawerOpen" show-if-above :width="200" :breakpoint="500" bordered>
+    <!-- <q-drawer v-model="leftDrawerOpen" show-if-above :width="200" :breakpoint="500" bordered>
       <q-scroll-area class="fit">
         <q-list>
 
@@ -30,7 +30,7 @@
 
         </q-list>
       </q-scroll-area>
-    </q-drawer>
+    </q-drawer> -->
 
     <q-page-container>
       <router-view />

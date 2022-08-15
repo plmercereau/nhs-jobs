@@ -1,0 +1,8 @@
+query vacanciesOptions {
+  staffGroups: vacancies(distinct_on: [staffGroup]) {
+    staffGroup
+  }
+  categories: vacancies(distinct_on: [category]) {
+    category
+  }
+}

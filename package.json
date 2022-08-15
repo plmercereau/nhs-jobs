@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "generate": "graphql-codegen --config graphql.config.yaml",
+    "generate": "graphql-codegen --config graphql.config.yml",
     "dev": "vite",
     "build": "vue-tsc --noEmit && vite build",
     "preview": "vite preview"
@@ -20,11 +20,17 @@
   "author": "Pierre-Louis Mercereau",
   "license": "ISC",
   "dependencies": {
+    "@apollo/client": "^3.6.9",
+    "@nhost/apollo": "^0.5.25",
+    "@nhost/vue": "^0.4.1",
     "@quasar/extras": "^1.15.1",
+    "@vue/apollo-composable": "4.0.0-alpha.19",
+    "@vueuse/core": "^9.1.0",
     "axios": "^0.27.2",
     "cheerio": "1.0.0-rc.12",
     "graphql": "^16.5.0",
     "graphql-request": "^4.3.0",
+    "graphql-tag": "^2.12.6",
     "vue": "^3.2.37",
     "vue-router": "^4.1.3"
   },

@@ -1831,6 +1831,7 @@ export type DateComparisonExp = {
 export type FetchRequests = {
   __typename?: 'fetchRequests';
   all: Scalars['Boolean'];
+  created_at?: Maybe<Scalars['timestamptz']>;
   id: Scalars['uuid'];
   page: Scalars['Int'];
 };
@@ -1877,6 +1878,7 @@ export type FetchRequestsBoolExp = {
   _not?: InputMaybe<FetchRequestsBoolExp>;
   _or?: InputMaybe<Array<FetchRequestsBoolExp>>;
   all?: InputMaybe<BooleanComparisonExp>;
+  created_at?: InputMaybe<TimestamptzComparisonExp>;
   id?: InputMaybe<UuidComparisonExp>;
   page?: InputMaybe<IntComparisonExp>;
 };
@@ -1895,6 +1897,7 @@ export type FetchRequestsIncInput = {
 /** input type for inserting data into table "fetch_requests" */
 export type FetchRequestsInsertInput = {
   all?: InputMaybe<Scalars['Boolean']>;
+  created_at?: InputMaybe<Scalars['timestamptz']>;
   id?: InputMaybe<Scalars['uuid']>;
   page?: InputMaybe<Scalars['Int']>;
 };
@@ -1902,6 +1905,7 @@ export type FetchRequestsInsertInput = {
 /** aggregate max on columns */
 export type FetchRequestsMaxFields = {
   __typename?: 'fetchRequests_max_fields';
+  created_at?: Maybe<Scalars['timestamptz']>;
   id?: Maybe<Scalars['uuid']>;
   page?: Maybe<Scalars['Int']>;
 };
@@ -1909,6 +1913,7 @@ export type FetchRequestsMaxFields = {
 /** aggregate min on columns */
 export type FetchRequestsMinFields = {
   __typename?: 'fetchRequests_min_fields';
+  created_at?: Maybe<Scalars['timestamptz']>;
   id?: Maybe<Scalars['uuid']>;
   page?: Maybe<Scalars['Int']>;
 };
@@ -1932,6 +1937,7 @@ export type FetchRequestsOnConflict = {
 /** Ordering options when selecting data from "fetch_requests". */
 export type FetchRequestsOrderBy = {
   all?: InputMaybe<OrderBy>;
+  created_at?: InputMaybe<OrderBy>;
   id?: InputMaybe<OrderBy>;
   page?: InputMaybe<OrderBy>;
 };
@@ -1946,6 +1952,8 @@ export enum FetchRequestsSelectColumn {
   /** column name */
   All = 'all',
   /** column name */
+  CreatedAt = 'created_at',
+  /** column name */
   Id = 'id',
   /** column name */
   Page = 'page'
@@ -1954,6 +1962,7 @@ export enum FetchRequestsSelectColumn {
 /** input type for updating data in table "fetch_requests" */
 export type FetchRequestsSetInput = {
   all?: InputMaybe<Scalars['Boolean']>;
+  created_at?: InputMaybe<Scalars['timestamptz']>;
   id?: InputMaybe<Scalars['uuid']>;
   page?: InputMaybe<Scalars['Int']>;
 };
@@ -1986,6 +1995,8 @@ export type FetchRequestsSumFields = {
 export enum FetchRequestsUpdateColumn {
   /** column name */
   All = 'all',
+  /** column name */
+  CreatedAt = 'created_at',
   /** column name */
   Id = 'id',
   /** column name */

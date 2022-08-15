@@ -1,0 +1,19 @@
+query vacanciesTable($limit: Int!, $offset: Int!, $where: vacancies_bool_exp) {
+  vacancies(limit: $limit, offset: $offset, where: $where) {
+    id
+    title
+    agency
+    category
+    closingDate
+    jobRef
+    jobType
+    posted
+    salary
+    staffGroup
+  }
+  vacanciesAggregate(where: $where) {
+    aggregate {
+      count
+    }
+  }
+}
