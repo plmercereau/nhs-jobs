@@ -110,9 +110,10 @@ export default async (req: Request, res: Response) => {
     return res.status(401).send('unauthorized')
   }
   try {
-    const fetched = await etl(req.body.all)
-    console.log(`done: upserted ${fetched} vacancies`)
-    return res.status(200).json({ fetched })
+    etl(req.body.all).then(fetched => {
+      console.log(`done: upserted ${fetched} vacancies`)
+    })
+    return res.status(200).json({ fetching: true })
   } catch (error) {
     return res.status(500).json(error)
   }
