@@ -1,10 +1,10 @@
-query vacanciesTable($limit: Int!, $offset: Int!, $where: vacancies_bool_exp) {
-  vacancies(
-    limit: $limit
-    offset: $offset
-    where: $where
-    order_by: { posted: desc }
-  ) {
+query vacanciesTable(
+  $limit: Int!
+  $offset: Int!
+  $where: vacancies_bool_exp
+  $orderBy: [vacancies_order_by!]
+) {
+  vacancies(limit: $limit, offset: $offset, where: $where, order_by: $orderBy) {
     id
     title
     agency

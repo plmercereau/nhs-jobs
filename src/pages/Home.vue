@@ -105,11 +105,12 @@ const filterCategoryOptions = (val: string, update: (fn: () => void) => void) =>
 const staffGroup = ref<string[] | null>(null)
 const category = ref<string[] | null>(null)
 
+// TODO from url parameters
 const pagination = ref({
-    sortBy: 'desc', // TODO implement + from url
-    descending: false, // TODO implement + from url
-    page: 1, // TODO from url
-    rowsPerPage: 20, // TODO from url
+    sortBy: 'closingDate',
+    descending: false,
+    page: 1,
+    rowsPerPage: 20,
     rowsNumber: 0,
 })
 
@@ -119,6 +120,8 @@ function onRequest(props: any) {
     console.log('onRequest', props)
     pagination.value.page = props.pagination.page
     pagination.value.rowsPerPage = props.pagination.rowsPerPage
+    pagination.value.sortBy = props.pagination.sortBy
+    pagination.value.descending = props.pagination.descending
 }
 
 // Data
@@ -136,6 +139,7 @@ const variables = computed(() => {
         limit: pagination.value.rowsPerPage,
         offset: (pagination.value.page - 1) * pagination.value.rowsPerPage,
         where: filters.length ? { _and: filters } : null,
+        orderBy: { [pagination.value.sortBy]: pagination.value.descending ? 'desc' : 'asc' }
     }
 })
 
@@ -155,7 +159,7 @@ const columns: QTableColumn[] = [
         sortable: true,
     },
     {
-        name: 'staff-group',
+        name: 'staffGroup',
         label: 'Staff Group',
         align: 'left',
         field: 'staffGroup',
@@ -176,7 +180,7 @@ const columns: QTableColumn[] = [
         sortable: true,
     },
     {
-        name: 'job-type',
+        name: 'jobType',
         label: 'Job Type',
         align: 'left',
         field: 'jobType',
@@ -198,7 +202,7 @@ const columns: QTableColumn[] = [
         format: (val?: string) => val?.split('-').reverse().join('/') ?? ''
     },
     {
-        name: 'closing-date',
+        name: 'closingDate',
         label: 'Closing Date',
         align: 'left',
         field: 'closingDate',

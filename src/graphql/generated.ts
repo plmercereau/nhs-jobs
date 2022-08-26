@@ -345,6 +345,7 @@ export type VacanciesTableQueryVariables = Exact<{
   limit: Scalars['Int'];
   offset: Scalars['Int'];
   where?: InputMaybe<VacanciesBoolExp>;
+  orderBy?: InputMaybe<Array<VacanciesOrderBy> | VacanciesOrderBy>;
 }>;
 
 
@@ -382,8 +383,8 @@ export function useVacanciesOptionsLazyQuery(options: VueApolloComposable.UseQue
 }
 export type VacanciesOptionsQueryCompositionFunctionResult = VueApolloComposable.UseQueryReturn<VacanciesOptionsQuery, VacanciesOptionsQueryVariables>;
 export const VacanciesTableDocument = gql`
-    query vacanciesTable($limit: Int!, $offset: Int!, $where: vacancies_bool_exp) {
-  vacancies(limit: $limit, offset: $offset, where: $where) {
+    query vacanciesTable($limit: Int!, $offset: Int!, $where: vacancies_bool_exp, $orderBy: [vacancies_order_by!]) {
+  vacancies(limit: $limit, offset: $offset, where: $where, order_by: $orderBy) {
     id
     title
     agency
@@ -418,6 +419,7 @@ export const VacanciesTableDocument = gql`
  *   limit: // value for 'limit'
  *   offset: // value for 'offset'
  *   where: // value for 'where'
+ *   orderBy: // value for 'orderBy'
  * });
  */
 export function useVacanciesTableQuery(variables: VacanciesTableQueryVariables | VueCompositionApi.Ref<VacanciesTableQueryVariables> | ReactiveFunction<VacanciesTableQueryVariables>, options: VueApolloComposable.UseQueryOptions<VacanciesTableQuery, VacanciesTableQueryVariables> | VueCompositionApi.Ref<VueApolloComposable.UseQueryOptions<VacanciesTableQuery, VacanciesTableQueryVariables>> | ReactiveFunction<VueApolloComposable.UseQueryOptions<VacanciesTableQuery, VacanciesTableQueryVariables>> = {}) {
