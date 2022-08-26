@@ -15,22 +15,26 @@ configuration:
     update: updateFetchRequests
     update_by_pk: updateFetchRequest
 event_triggers:
-- definition:
-    enable_manual: false
-    insert:
-      columns: "*"
-  headers:
-  - name: nhost-webhook-secret
-    value_from_env: NHOST_WEBHOOK_SECRET
-  name: fetch-vacancies-page
-  request_transform:
-    body:
-      action: transform
-      template: "{\n  \"all\": {{$body.event.data.new.all}},\n  \"page\": {{$body.event.data.new.page}}\n}"
-    template_engine: Kriti
-    version: 2
-  retry_conf:
-    interval_sec: 10
-    num_retries: 0
-    timeout_sec: 60
-  webhook: "{{NHOST_BACKEND_URL}}/v1/functions/fetch"
+  - name: fetch-vacancies-page
+    definition:
+      enable_manual: false
+      insert:
+        columns: '*'
+    retry_conf:
+      interval_sec: 10
+      num_retries: 0
+      timeout_sec: 60
+    webhook: '{{NHOST_BACKEND_URL}}/v1/functions/fetch'
+    headers:
+      - name: nhost-webhook-secret
+        value_from_env: NHOST_WEBHOOK_SECRET
+    request_transform:
+      body:
+        action: transform
+        template: |-
+          {
+            "all": {{$body.event.data.new.all}},
+            "page": {{$body.event.data.new.page}}
+          }
+      template_engine: Kriti
+      version: 2

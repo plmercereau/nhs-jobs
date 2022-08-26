@@ -29,33 +29,33 @@ configuration:
     update: updateVacancies
     update_by_pk: updateVacancy
 select_permissions:
-- permission:
-    allow_aggregations: true
-    columns:
-    - closing_date
-    - posted
-    - id
-    - agency
-    - category
-    - job_ref
-    - job_type
-    - salary
-    - staff_group
-    - title
-    filter: {}
-  role: public
-- permission:
-    allow_aggregations: true
-    columns:
-    - closing_date
-    - posted
-    - id
-    - agency
-    - category
-    - job_ref
-    - job_type
-    - salary
-    - staff_group
-    - title
-    filter: {}
-  role: user
+  - role: public
+    permission:
+      columns:
+        - closing_date
+        - posted
+        - id
+        - agency
+        - category
+        - job_ref
+        - job_type
+        - salary
+        - staff_group
+        - title
+      filter: {}
+      allow_aggregations: true
+  - role: user
+    permission:
+      columns:
+        - closing_date
+        - posted
+        - id
+        - agency
+        - category
+        - job_ref
+        - job_type
+        - salary
+        - staff_group
+        - title
+      filter: {}
+      allow_aggregations: true

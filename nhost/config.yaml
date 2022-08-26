@@ -3,13 +3,8 @@ services:
   mailhog:
     port: 8025
   hasura:
-    version: v2.10.0
     environment:
       hasura_graphql_enable_remote_schema_permissions: false
-  auth:
-    version: 0.10.0
-  storage:
-    version: 0.2.3
 auth:
   access_control:
     email:
@@ -109,7 +104,7 @@ auth:
         from: ''
         messaging_service_id: ''
   smtp:
-    host: nhost_mailhog
+    host: mailhog
     method: ''
     pass: password
     port: 1807

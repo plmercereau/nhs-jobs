@@ -1,0 +1,17 @@
+{
+  "name": "nhs-jobs-functions",
+  "version": "1.0.0",
+  "description": "",
+  "author": "Pierre-Louis Mercereau",
+  "license": "ISC",
+  "dependencies": {
+    "axios": "^0.27.2",
+    "cheerio": "1.0.0-rc.12",
+    "graphql": "^16.5.0",
+    "graphql-request": "^4.3.0",
+    "graphql-tag": "^2.12.6"
+  },
+  "devDependencies": {
+    "@types/express": "^4.17.13"
+  }
+}
