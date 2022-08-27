@@ -12,9 +12,15 @@
             @request="onRequest"
             binary-state-sort
             :style="'height: ' + height + 'px'"
-            :class="'header-table-' + mode">
+            :class="'header-table-' + mode"
+            @row-click="onRowClick">
             <template v-slot:top>
                 <div class="q-pa-md" style="width: 100%">
+                    <div class="row q-gutter-md">
+                        <div class="col">
+                            <q-toggle v-model="closedVacancies" label="Include closed vacancies" />
+                        </div>
+                    </div>
                     <div class="row q-gutter-md">
                         <div class="col">
                             <q-select
@@ -39,9 +45,6 @@
                                 @filter="filterCategoryOptions" />
                         </div>
                     </div>
-                    <div class="row">
-                        <div class="col"></div>
-                    </div>
                 </div>
                 <!-- <q-input
                         borderless
@@ -55,15 +58,7 @@
                     </q-input> -->
             </template>
             <template v-slot:top-right>
-                <q-input
-                    borderless
-                    debounce="300"
-                    v-model="filter"
-                    placeholder="Search">
-                    <template v-slot:append>
-                        <q-icon name="search" />
-                    </template>
-                </q-input>
+
             </template>
         </q-table>
     </q-page>
@@ -74,7 +69,21 @@ import { QTableColumn } from 'quasar'
 import { computed, ref } from 'vue'
 import { useElementSize } from '@vueuse/core'
 import { useDarkLightMode } from '../composables/dark-light-mode'
-import { useVacanciesTableQuery, useVacanciesOptionsQuery } from '../graphql/generated'
+import {
+    useVacanciesTableQuery,
+    useVacanciesOptionsQuery,
+    VacanciesTableQuery
+} from '../graphql/generated'
+
+const onRowClick = (
+    _: Event,
+    row: VacanciesTableQuery['vacancies'][number],
+    __: number
+) => {
+    window.open(
+        'https://www.jobs.nhs.uk/xi/direct_apply?action=redirect;vac_ref=' + row.id
+    )
+}
 
 // Options
 const { result: options, onResult: onOptionsResult } =
@@ -90,7 +99,10 @@ const staffGroupOptions = computed(() =>
 )
 const categoryOptions = ref<string[]>([])
 
-const filterCategoryOptions = (val: string, update: (fn: () => void) => void) => {
+const filterCategoryOptions = (
+    val: string,
+    update: (fn: () => void) => void
+) => {
     update(() => {
         const input = val.toLowerCase()
         categoryOptions.value =
@@ -104,6 +116,7 @@ const filterCategoryOptions = (val: string, update: (fn: () => void) => void) =>
 // Inputs
 const staffGroup = ref<string[] | null>(null)
 const category = ref<string[] | null>(null)
+const closedVacancies = ref(false)
 
 // TODO from url parameters
 const pagination = ref({
@@ -111,13 +124,12 @@ const pagination = ref({
     descending: false,
     page: 1,
     rowsPerPage: 20,
-    rowsNumber: 0,
+    rowsNumber: 0
 })
 
 const filter = ref('')
 
 function onRequest(props: any) {
-    console.log('onRequest', props)
     pagination.value.page = props.pagination.page
     pagination.value.rowsPerPage = props.pagination.rowsPerPage
     pagination.value.sortBy = props.pagination.sortBy
@@ -129,17 +141,25 @@ const variables = computed(() => {
     const filters: Record<string, unknown>[] = []
     if (category.value?.length) {
         filters.push({
-            _or: category.value.map(cat => ({ category: { _ilike: `%${cat}%` } })),
+            _or: category.value.map(cat => ({ category: { _ilike: `%${cat}%` } }))
         })
     }
     if (staffGroup.value?.length) {
         filters.push({ staffGroup: { _in: staffGroup.value } })
     }
+    if (!closedVacancies.value) {
+        filters.push({ closingDate: { _gte: new Date().toISOString().split('T')[0] } })
+    }
+    const where = {
+        _and: filters
+    }
     return {
         limit: pagination.value.rowsPerPage,
         offset: (pagination.value.page - 1) * pagination.value.rowsPerPage,
-        where: filters.length ? { _and: filters } : null,
-        orderBy: { [pagination.value.sortBy]: pagination.value.descending ? 'desc' : 'asc' }
+        where,
+        orderBy: {
+            [pagination.value.sortBy]: pagination.value.descending ? 'desc' : 'asc'
+        }
     }
 })
 
@@ -156,42 +176,42 @@ const columns: QTableColumn[] = [
         label: 'Title',
         align: 'left',
         field: 'title',
-        sortable: true,
+        sortable: true
     },
     {
         name: 'staffGroup',
         label: 'Staff Group',
         align: 'left',
         field: 'staffGroup',
-        sortable: true,
+        sortable: true
     },
     {
         name: 'category',
         label: 'Category',
         align: 'left',
         field: 'category',
-        sortable: true,
+        sortable: true
     },
     {
         name: 'agency',
         label: 'Agency',
         align: 'left',
         field: 'agency',
-        sortable: true,
+        sortable: true
     },
     {
         name: 'jobType',
         label: 'Job Type',
         align: 'left',
         field: 'jobType',
-        sortable: true,
+        sortable: true
     },
     {
         name: 'salary',
         label: 'Salary',
         align: 'left',
         field: 'salary',
-        sortable: true,
+        sortable: true
     },
     {
         name: 'posted',
@@ -208,7 +228,7 @@ const columns: QTableColumn[] = [
         field: 'closingDate',
         sortable: true,
         format: (val?: string) => val?.split('-').reverse().join('/') ?? ''
-    },
+    }
 ]
 
 // Styling
