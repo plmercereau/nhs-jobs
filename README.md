@@ -32,7 +32,7 @@ VS Code supports GraphQL through this nice [extension](https://marketplace.visua
 
 If no headers are defined, the backend will assume the schema introspection is made from a `public` user. You can then set the `x-hasura-admin-secret` header to get access to the full introspection.
 
-## Generate `graphql-request` operations
+## Generate `graphql-request` GraphQL operations
 
 [graphql-request](https://github.com/prisma-labs/graphql-request) is a simple and effective GraphQL client that can make GraphQL call much simpler in serverless functions.
 This repository is configured to generate code for `graphql-request` operations using the [GraphQL Code Generator](https://www.graphql-code-generator.com/):
