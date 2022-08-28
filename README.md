@@ -1,6 +1,6 @@
 # NHS Jobs
 
-To search job vacancies in the official NHS website can sometimes be some kind of a hassle. This small project proposes a different user interface so it is easier to find postings accross the NHS database, while waiting for the new oficial website due to be online by the end of October 2022.
+To search job vacancies in the official NHS website can sometimes be some kind of a hassle. This small project proposes a different user interface so it is easier to find postings accross the NHS database, while waiting for the new official website due to be online by the end of October 2022.
 
 This project is above all a means to run through some of the abilities the Nhost stack is offering to developers, in particular.
 
@@ -50,7 +50,7 @@ In a similar fashion, we can [generate GraphQL operations for Vue Apollo](https:
 - See the [generated composable](https://github.com/plmercereau/nhs-jobs/blob/main/src/graphql/generated.ts#L425)
 - Use the `useVacanciesTableQuery` [in a Vue composant](https://github.com/plmercereau/nhs-jobs/blob/main/src/pages/Home.vue#L166)
 
-## Use the Nhost JS SDK with Quasar and Apollo
+## Use the Nhost JS SDK with Quasar, Vite, and Apollo
 
 To use the Nhost JS SDK in a client-side rendered Quasar application is quite straight forward.
 As Quasar is based on Vue, we are using the standard [@nhost/vue library](https://docs.nhost.io/reference/vue), in addition to [@nhost/apollo](https://docs.nhost.io/reference/vue/apollo).
