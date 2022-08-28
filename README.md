@@ -58,7 +58,7 @@ To use the Nhost JS SDK in a client-side rendered Quasar application is quite st
 
 As Quasar is based on Vue, we are using the standard [@nhost/vue library](https://docs.nhost.io/reference/vue), in addition to [@nhost/apollo](https://docs.nhost.io/reference/vue/apollo).
 
-Please have a look at the [main configuration file](https://github.com/plmercereau/nhs-jobs/blob/main/src/main.ts).
+Please have a look at the [the Vue main file](https://github.com/plmercereau/nhs-jobs/blob/main/src/main.ts) and the [Vite configuration file](https://github.com/plmercereau/nhs-jobs/blob/main/vite.config.ts).
 
 ## Configure a GraphQL query to render a paginated and searchable table
 
