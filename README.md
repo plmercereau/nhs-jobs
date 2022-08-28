@@ -1,8 +1,8 @@
 # NHS Jobs
 
-To search job vacancies in the [official NHS website](https://www.jobs.nhs.uk/xi/search_vacancy/) can sometimes be some kind of a hassle. This small project proposes a different user interface so it is easier to find postings accross the NHS database, while waiting for the new official website due to be online by the end of October 2022.
+To search job vacancies in the [official NHS website](https://www.jobs.nhs.uk/xi/search_vacancy/) can sometimes be some kind of a hassle. This small project proposes a different user interface so it is easier to search NHS postings, while waiting for the new official website due to be online by the end of October 2022.
 
-This project is above all a means to run through some of the abilities the Nhost stack is offering to developers, in particular.
+This project is above all a means to run through some of the abilities the Nhost stack is offering to developers.
 
 The official NHS website does not expose a standard API. As a result, it is not possible to make direct search calls to fetch a JSON payload and render it in the frontend. In this project, the official HTML website is entirely scraped once with [Cheerio](https://github.com/cheeriojs/cheerio) into the database. Then, three times a day, vacancies from the past two days are scraped and updated into the database.
 
