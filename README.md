@@ -1,6 +1,6 @@
 # NHS Jobs
 
-To search job vacancies in the official NHS website can sometimes be some kind of a hassle. This small project proposes a different user interface so it is easier to find postings accross the NHS database, while waiting for the new official website due to be online by the end of October 2022.
+To search job vacancies in the [official NHS website](https://www.jobs.nhs.uk/xi/search_vacancy/) can sometimes be some kind of a hassle. This small project proposes a different user interface so it is easier to find postings accross the NHS database, while waiting for the new official website due to be online by the end of October 2022.
 
 This project is above all a means to run through some of the abilities the Nhost stack is offering to developers, in particular.
 
@@ -8,7 +8,7 @@ The official NHS website does not expose a standard API. As a result, it is not 
 
 ## Schedule a recurring serverless function call
 
-In this project, we connect a [Hasura cron triggers](https://hasura.io/docs/latest/scheduled-triggers/create-cron-trigger/) with a Nhost [Serverless function](https://docs.nhost.io/platform/serverless-functions).
+In this project, we connect a [Hasura cron trigger](https://hasura.io/docs/latest/scheduled-triggers/create-cron-trigger/) with a Nhost [Serverless function](https://docs.nhost.io/platform/serverless-functions).
 
 To do so, we need:
 
@@ -19,6 +19,7 @@ To do so, we need:
 ## Split a long backend processing into several smaller serverless function calls
 
 The scrapping of the initial HTML website takes time and causes a function timeout. For tackle this, the [`fetch` function](https://github.com/plmercereau/nhs-jobs/blob/main/functions/fetch.ts) only scraps a single result page in the original website, then [inserts a new row in the `fetch_request` table for next page in the database](https://github.com/plmercereau/nhs-jobs/blob/main/functions/fetch.ts#L106).
+
 We define a [Hasura event trigger](https://hasura.io/docs/latest/event-triggers/index/) on the [`fetch_request` table](https://github.com/plmercereau/nhs-jobs/blob/main/nhost/metadata/databases/default/tables/public_fetch_requests.yaml#L18) that calls again the `fetch` function for the next page, and so on, until no result is available anymore.
 
 ## Make GraphQL calls in a serverless function
@@ -28,6 +29,7 @@ A common pattern in Nhost functions is to call the database to get some context 
 ## Enable autocompletion in VS Code for your Hasura schema
 
 VS Code supports GraphQL through this nice [extension](https://marketplace.visualstudio.com/items?itemName=GraphQL.vscode-graphql). To activate it, you only need to create a `graphql.config.yml` file in the root directory and declare a schema that points to the Nhost local project (when using the CLI) or the Hasura endpoint of your cloud project. [In this repository](https://github.com/plmercereau/nhs-jobs/blob/main/graphql.config.yml#L2), we are using the CLI to develop locally.
+
 If no headers are defined, the backend will assume the schema introspection is made from a `public` user. You can then set the `x-hasura-admin-secret` header to get access to the full introspection.
 
 ## Generate `graphql-request` operations
@@ -53,15 +55,17 @@ In a similar fashion, we can [generate GraphQL operations for Vue Apollo](https:
 ## Use the Nhost JS SDK with Quasar, Vite, and Apollo
 
 To use the Nhost JS SDK in a client-side rendered Quasar application is quite straight forward.
+
 As Quasar is based on Vue, we are using the standard [@nhost/vue library](https://docs.nhost.io/reference/vue), in addition to [@nhost/apollo](https://docs.nhost.io/reference/vue/apollo).
-Please have a look at the [main configuration file](https://github.com/plmercereau/nhs-jobs/blob/main/src/main.ts)
+
+Please have a look at the [main configuration file](https://github.com/plmercereau/nhs-jobs/blob/main/src/main.ts).
 
 ## Configure a GraphQL query to render a paginated and searchable table
 
-Quite easy in using Hasura's [limit, offset, where and order_by clauses](https://github.com/plmercereau/nhs-jobs/blob/main/src/graphql/vacanciesTable.graphql#L7) as GraphQL variables in a Vue Apollo composable - [see source](https://github.com/plmercereau/nhs-jobs/blob/main/src/pages/Home.vue#L140)
+Quite easy in using Hasura's [limit, offset, where and order_by clauses](https://github.com/plmercereau/nhs-jobs/blob/main/src/graphql/vacanciesTable.graphql#L7) as GraphQL variables in a Vue Apollo composable - [see source](https://github.com/plmercereau/nhs-jobs/blob/main/src/pages/Home.vue#L140).
 
 ## Bonus: dark mode with Quasar
 
 [Small composable](https://github.com/plmercereau/nhs-jobs/blob/main/src/composables/dark-light-mode.ts) to start the application in dark/light mode according to user's preferences, and to persist its change to `localStorage`.
 
-It is also a bit tricky to set dark/light mode to [sticky headers in Quasar's `QTable` component](https://quasar.dev/vue-components/table#sticky-header-column) as it is based on CSS' `position: sticky`. [Here's how sass can be configured to make it work](https://github.com/plmercereau/nhs-jobs/blob/main/src/pages/Home.vue#L241)
+It is also a bit tricky to set dark/light mode to [sticky headers in Quasar's `QTable` component](https://quasar.dev/vue-components/table#sticky-header-column) as it is based on CSS' `position: sticky`. [Here's how sass can be configured to make it work](https://github.com/plmercereau/nhs-jobs/blob/main/src/pages/Home.vue#L241).
