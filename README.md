@@ -30,18 +30,18 @@ A common pattern in Nhost functions is to call the database to get some context 
 VS Code supports GraphQL through this nice [extension](https://marketplace.visualstudio.com/items?itemName=GraphQL.vscode-graphql). To activate it, you only need to create a `graphql.config.yml` file in the root directory and declare a schema that points to the Nhost local project (when using the CLI) or the Hasura endpoint of your cloud project. [In this repository](https://github.com/plmercereau/nhs-jobs/blob/main/graphql.config.yml#L2), we are using the CLI to develop locally.
 If no headers are defined, the backend will assume the schema introspection is made from a `public` user. You can then set the `x-hasura-admin-secret` header to get access to the full introspection.
 
-## Generate GraphQL Request operations
+## Generate `graphql-request` operations
 
 [graphql-request](https://github.com/prisma-labs/graphql-request) is a simple and effective GraphQL client that can make GraphQL call much simpler in serverless functions.
 This repository is configured to generate code for `graphql-request` operations using the [GraphQL Code Generator](https://www.graphql-code-generator.com/):
 
-- Follow [installation instructions](https://www.graphql-code-generator.com/plugins/typescript/typescript-graphql-request)
+- Follow the [graphql-request GraphQL Codegen plugin installation instructions](https://www.graphql-code-generator.com/plugins/typescript/typescript-graphql-request)
 - Configure the [generator in `graphql.config.yml`](https://github.com/plmercereau/nhs-jobs/blob/main/graphql.config.yml#L22)
 - Define GraphQL operations in the `functions` directory, for instance an [upsert mutation](https://github.com/plmercereau/nhs-jobs/blob/main/functions/_upsertVacancies.graphql). GraphQL files are prefixed with `_` so we are sure there will be any attempt to deploy them as a function endpoint.
 - See the [generated sdk](https://github.com/plmercereau/nhs-jobs/blob/main/functions/_sdk.ts)
 - Use the [operation in a function](https://github.com/plmercereau/nhs-jobs/blob/main/functions/fetch.ts#L100)
 
-## Generate Vue-Apollo GraphQL operations
+## Generate `vue-apollo` GraphQL operations
 
 In a similar fashion, we can [generate GraphQL operations for Vue Apollo](https://www.graphql-code-generator.com/plugins/typescript/typescript-vue-apollo). It works fine with `@nhost/vue` and `@nhost/apollo`:
 
