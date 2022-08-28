@@ -39,13 +39,13 @@ This repository is configured to generate code for `graphql-request` operations 
 
 - Follow the [graphql-request GraphQL Codegen plugin installation instructions](https://www.graphql-code-generator.com/plugins/typescript/typescript-graphql-request)
 - Configure the [generator in `graphql.config.yml`](https://github.com/plmercereau/nhs-jobs/blob/main/graphql.config.yml#L22)
-- Define GraphQL operations in the `functions` directory, for instance an [upsert mutation](https://github.com/plmercereau/nhs-jobs/blob/main/functions/_upsertVacancies.graphql). GraphQL files are prefixed with `_` so we are sure there will be any attempt to deploy them as a function endpoint.
+- Define GraphQL operations in the `functions` directory, for instance an [upsert mutation](https://github.com/plmercereau/nhs-jobs/blob/main/functions/_upsertVacancies.graphql). GraphQL files are prefixed with `_` so we are sure there won't be any attempt to deploy them as a function endpoint.
 - See the [generated sdk](https://github.com/plmercereau/nhs-jobs/blob/main/functions/_sdk.ts)
 - Use the [operation in a function](https://github.com/plmercereau/nhs-jobs/blob/main/functions/fetch.ts#L100)
 
 ## Generate `vue-apollo` GraphQL operations
 
-In a similar fashion, we can [generate GraphQL operations for Vue Apollo](https://www.graphql-code-generator.com/plugins/typescript/typescript-vue-apollo). It works fine with `@nhost/vue` and `@nhost/apollo`:
+In a similar way, we can [generate GraphQL operations for Vue Apollo](https://www.graphql-code-generator.com/plugins/typescript/typescript-vue-apollo). It works fine with `@nhost/vue` and `@nhost/apollo`:
 
 - Configure the [generator in `graphql.config.yml`](https://github.com/plmercereau/nhs-jobs/blob/main/graphql.config.yml#L6). Note that we added a `x-hasura-role` header set to `user` to the schema will be generated given the permissions of the `users` role.
 - Define GraphQL operations in the `src/graphql` directory, for instance [`vacanciesTable`](https://github.com/plmercereau/nhs-jobs/blob/main/src/graphql/vacanciesTable.graphql)
